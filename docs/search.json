@@ -6,7 +6,7 @@
       "description": "Some additional details about the website",
       "author": [],
       "contents": "\r\nAbout Me\r\nMaxwell is a rising senior at Newton North High\r\nSchool. He enjoys writing and playing the saxophone.\r\nAbout the Project\r\nMy project, The Title of My Project, explores…\r\nGoals\r\nGoal One\r\nChallenge One\r\n\r\nGoal Two\r\n‘“This is data science”’\r\n\r\nPreceptor\r\n\r\nKane’s Free High School\r\nData Science Bootcamp\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-07T23:37:53-04:00"
+      "last_modified": "2022-08-08T00:04:46-04:00"
     },
     {
       "path": "index.html",
@@ -14,7 +14,33 @@
       "description": "This is where I will describe my final project.\n",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-07T23:37:56-04:00"
+      "last_modified": "2022-08-08T00:04:49-04:00"
+    },
+    {
+      "path": "source_A.html",
+      "title": "Source A",
+      "description": "Detailed notes for Source A.\n",
+      "author": [
+        {
+          "name": "Maxwell Lu",
+          "url": "https://example.com/norajones"
+        }
+      ],
+      "contents": "\r\nDistill is a publication format for scientific and technical writing,\r\nnative to the web.\r\nLearn more about using Distill for R Markdown at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-08T00:04:50-04:00"
+    },
+    {
+      "path": "source_B.html",
+      "title": "Source B",
+      "description": "Detailed notes for Source B.\n",
+      "author": [
+        {
+          "name": "Maxwell Lu",
+          "url": "https://example.com/norajones"
+        }
+      ],
+      "contents": "\r\nDistill is a publication format for scientific and technical writing,\r\nnative to the web.\r\nLearn more about using Distill for R Markdown at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-08T00:04:51-04:00"
     }
   ],
   "collections": []
