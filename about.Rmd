@@ -7,4 +7,18 @@ description: |
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+## About Me
+**Maxwell** is a rising senior at Newton North High School. He enjoys writing and playing the saxophone.
 
+## About the Project
+My project, *The Title of My Project*, explores...
+
+### Goals
+* Goal One
+  + Challenge One
+* Goal Two
+
+‘“This is data science”’  
+~ Preceptor
+
+[Kane’s Free High School Data Science Bootcamp](https://bootcamp.davidkane.info)

@@ -5,8 +5,8 @@
       "title": "About this site",
       "description": "Some additional details about the website",
       "author": [],
-      "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-07T23:13:15-04:00"
+      "contents": "\r\nAbout Me\r\nMaxwell is a rising senior at Newton North High\r\nSchool. He enjoys writing and playing the saxophone.\r\nAbout the Project\r\nMy project, The Title of My Project, explores…\r\nGoals\r\nGoal One\r\nChallenge One\r\n\r\nGoal Two\r\n‘“This is data science”’\r\n\r\nPreceptor\r\n\r\nKane’s Free High School\r\nData Science Bootcamp\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-07T23:37:53-04:00"
     },
     {
       "path": "index.html",
@@ -14,7 +14,7 @@
       "description": "This is where I will describe my final project.\n",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-07T23:13:19-04:00"
+      "last_modified": "2022-08-07T23:37:56-04:00"
     }
   ],
   "collections": []
