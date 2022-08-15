@@ -7,10 +7,12 @@ navbar:
   right:
     - text: "Home"
       href: index.html
+    - text: "Core"
+      href: core.html
     - text: "About"
       href: about.html
     - text: "Sources"
-      menu:
+      menu: 
          - text: "Source A"
            href: source_A.html
          - text: "Source B"

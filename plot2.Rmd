@@ -1,0 +1,46 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(ggthemes)
+```
+
+```{r}
+heart2020 <- read_csv(file = "heart_2020_cleaned.csv")
+heart2020 |>
+slice_sample(n = 1000)
+```
+
+```{r}
+sample1000 <- heart2020 |>
+  slice_sample(n = 1000)
+```
+
+```{r}
+healthplot <- sample1000 |>
+  group_by(GenHealth, Sex) |>
+  summarize(mean_BMI = mean(BMI), .groups = "drop") |>
+  ggplot(aes(x = GenHealth, y = mean_BMI, fill = Sex)) +
+  geom_col(position = "dodge", color = "black") +
+  scale_fill_manual(values = c("cornflowerblue", "lightpink")) +
+  scale_x_discrete(limits = c("Poor", "Fair", "Good", "Very good", "Excellent")) +
+  theme_minimal() +
+  labs(title = "The Average Body Mass Index in Five Categories of Health",
+       subtitle = "Higher BMIs tend to result in worsened health",
+       x = "General Health",
+       y = "Average Body Mass Index (BMI)",
+       fill = "Gender") +
+      theme(plot.title = element_text(face = "bold"),
+          axis.text = element_text(face = "bold"), 
+          axis.title.x = element_text(face = "bold"),
+          axis.title.y = element_text(face = "bold"))
+```
+
+```{r}
+write_rds(healthplot, "healthplot.rds")
+```
+

@@ -6,7 +6,15 @@
       "description": "Some additional details about the website",
       "author": [],
       "contents": "\r\nAbout Me\r\nMaxwell is a rising senior at Newton North High\r\nSchool. He enjoys writing and playing the saxophone.\r\nAbout the Project\r\nMy project, The Title of My Project, explores…\r\nGoals\r\nGoal One\r\nChallenge One\r\n\r\nGoal Two\r\n‘“This is data science”’\r\n\r\nPreceptor\r\n\r\nKane’s Free High School\r\nData Science Bootcamp\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-08T00:04:46-04:00"
+      "last_modified": "2022-08-14T20:42:20-04:00"
+    },
+    {
+      "path": "Core.html",
+      "title": "Untitled",
+      "description": "A new article created using the Distill format.\n",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-14T20:42:24-04:00"
     },
     {
       "path": "index.html",
@@ -14,7 +22,39 @@
       "description": "This is where I will describe my final project.\n",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-08T00:04:49-04:00"
+      "last_modified": "2022-08-14T20:42:25-04:00"
+    },
+    {
+      "path": "plot1.html",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nTitle of My Final Project\r\n\r\n\r\nHome\r\nCore\r\nAbout\r\n\r\n\r\nSources\r\n \r\n▾\r\n\r\n\r\nSource A\r\nSource B\r\n\r\n\r\n☰\r\n\r\n\r\n  \r\n    \r\n      \r\n        \r\n        \r\n        \r\n      \r\n      \r\n    \r\n    \r\n      \r\n  Home\r\n\r\n\r\n  Core\r\n\r\n\r\n  About\r\n\r\n\r\n  \r\n    Sources\r\n     \r\n    \r\n  \r\n  \r\n      Source A\r\n    \r\n    \r\n      Source B\r\n    \r\n  \r\n      \r\n  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nheart2020 <- read_csv(file = \"heart_2020_cleaned.csv\")\r\n## Rows: 319795 Columns: 18\r\n## ── Column specification ────────────────────────────────────────────────────────\r\n## Delimiter: \",\"\r\n## chr (14): HeartDisease, Smoking, AlcoholDrinking, Stroke, DiffWalking, Sex, ...\r\n## dbl  (4): BMI, PhysicalHealth, MentalHealth, SleepTime\r\n## \r\n## ℹ Use `spec()` to retrieve the full column specification for this data.\r\n## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\r\nintroplot <- heart2020 |>\r\n  group_by(AgeCategory)|>\r\n  summarize(PercentageofHD = mean(HeartDisease == \"Yes\")) |>\r\n  ggplot(aes(x = AgeCategory, y = PercentageofHD)) +\r\n   geom_smooth(method = \"loess\", formula = y ~ x) +\r\n  geom_col(fill = \"maroon\", color = \"black\") +\r\n scale_x_discrete(breaks = c(\"18-24\", \"30-34\", \"40-44\", \"50-54\", \"60-64\", \"70-74\", \"80 or older\")) +\r\n  scale_y_continuous(labels = scales::percent_format()) +\r\n  theme_minimal() +\r\n  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +\r\n  labs(title = \"The Age Distribution of People With Heart Disease\",\r\n       subtitle = \"Risk for Heart Problems Increases With Age\",\r\n       x = \"Age\",\r\n       y = \"Percentage Heart Disease\") +\r\n  theme(plot.title = element_text(face = \"bold\"),\r\n          axis.text = element_text(face = \"bold\"), \r\n          axis.title.x = element_text(face = \"bold\"),\r\n          axis.title.y = element_text(face = \"bold\"))\r\nwrite_rds(introplot, \"introplot.rds\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-14T20:42:26-04:00"
+    },
+    {
+      "path": "plot2.html",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nTitle of My Final Project\r\n\r\n\r\nHome\r\nCore\r\nAbout\r\n\r\n\r\nSources\r\n \r\n▾\r\n\r\n\r\nSource A\r\nSource B\r\n\r\n\r\n☰\r\n\r\n\r\n  \r\n    \r\n      \r\n        \r\n        \r\n        \r\n      \r\n      \r\n    \r\n    \r\n      \r\n  Home\r\n\r\n\r\n  Core\r\n\r\n\r\n  About\r\n\r\n\r\n  \r\n    Sources\r\n     \r\n    \r\n  \r\n  \r\n      Source A\r\n    \r\n    \r\n      Source B\r\n    \r\n  \r\n      \r\n  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nheart2020 <- read_csv(file = \"heart_2020_cleaned.csv\")\r\n## Rows: 319795 Columns: 18\r\n## ── Column specification ────────────────────────────────────────────────────────\r\n## Delimiter: \",\"\r\n## chr (14): HeartDisease, Smoking, AlcoholDrinking, Stroke, DiffWalking, Sex, ...\r\n## dbl  (4): BMI, PhysicalHealth, MentalHealth, SleepTime\r\n## \r\n## ℹ Use `spec()` to retrieve the full column specification for this data.\r\n## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\r\nheart2020 |>\r\nslice_sample(n = 1000)\r\n## # A tibble: 1,000 × 18\r\n##    HeartDis…¹   BMI Smoking Alcoh…² Stroke Physi…³ Menta…⁴ DiffW…⁵ Sex   AgeCa…⁶\r\n##    <chr>      <dbl> <chr>   <chr>   <chr>    <dbl>   <dbl> <chr>   <chr> <chr>  \r\n##  1 No          40.7 No      No      No           0       0 No      Male  55-59  \r\n##  2 No          25.4 No      No      No           0       0 No      Fema… 45-49  \r\n##  3 No          43.2 Yes     No      No           0       0 Yes     Fema… 65-69  \r\n##  4 No          29.1 No      No      No          30      14 No      Fema… 65-69  \r\n##  5 No          53.0 Yes     No      No           0      20 No      Fema… 25-29  \r\n##  6 No          25.4 No      No      No          30      30 Yes     Fema… 18-24  \r\n##  7 No          28.5 No      No      No           3       0 No      Male  70-74  \r\n##  8 Yes         26.5 Yes     No      No           0       0 No      Fema… 55-59  \r\n##  9 Yes         26.8 Yes     No      Yes         30      15 Yes     Fema… 60-64  \r\n## 10 No          25.8 Yes     No      No          15      15 Yes     Male  45-49  \r\n## # … with 990 more rows, 8 more variables: Race <chr>, Diabetic <chr>,\r\n## #   PhysicalActivity <chr>, GenHealth <chr>, SleepTime <dbl>, Asthma <chr>,\r\n## #   KidneyDisease <chr>, SkinCancer <chr>, and abbreviated variable names\r\n## #   ¹​HeartDisease, ²​AlcoholDrinking, ³​PhysicalHealth, ⁴​MentalHealth,\r\n## #   ⁵​DiffWalking, ⁶​AgeCategory\r\n## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names\r\nsample1000 <- heart2020 |>\r\n  slice_sample(n = 1000)\r\nhealthplot <- sample1000 |>\r\n  group_by(GenHealth, Sex) |>\r\n  summarize(mean_BMI = mean(BMI), .groups = \"drop\") |>\r\n  ggplot(aes(x = GenHealth, y = mean_BMI, fill = Sex)) +\r\n  geom_col(position = \"dodge\", color = \"black\") +\r\n  scale_fill_manual(values = c(\"cornflowerblue\", \"lightpink\")) +\r\n  scale_x_discrete(limits = c(\"Poor\", \"Fair\", \"Good\", \"Very good\", \"Excellent\")) +\r\n  theme_minimal() +\r\n  labs(title = \"The Average Body Mass Index in Five Categories of Health\",\r\n       subtitle = \"Higher BMIs tend to result in worsened health\",\r\n       x = \"General Health\",\r\n       y = \"Average Body Mass Index (BMI)\",\r\n       fill = \"Gender\") +\r\n      theme(plot.title = element_text(face = \"bold\"),\r\n          axis.text = element_text(face = \"bold\"), \r\n          axis.title.x = element_text(face = \"bold\"),\r\n          axis.title.y = element_text(face = \"bold\"))\r\nwrite_rds(healthplot, \"healthplot.rds\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-14T20:42:27-04:00"
+    },
+    {
+      "path": "plot3.html",
+      "author": [],
+      "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nTitle of My Final Project\r\n\r\n\r\nHome\r\nCore\r\nAbout\r\n\r\n\r\nSources\r\n \r\n▾\r\n\r\n\r\nSource A\r\nSource B\r\n\r\n\r\n☰\r\n\r\n\r\n  \r\n    \r\n      \r\n        \r\n        \r\n        \r\n      \r\n      \r\n    \r\n    \r\n      \r\n  Home\r\n\r\n\r\n  Core\r\n\r\n\r\n  About\r\n\r\n\r\n  \r\n    Sources\r\n     \r\n    \r\n  \r\n  \r\n      Source A\r\n    \r\n    \r\n      Source B\r\n    \r\n  \r\n      \r\n  \r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nheart2020 <- read_csv(file = \"heart_2020_cleaned.csv\")\r\n## Rows: 319795 Columns: 18\r\n## ── Column specification ────────────────────────────────────────────────────────\r\n## Delimiter: \",\"\r\n## chr (14): HeartDisease, Smoking, AlcoholDrinking, Stroke, DiffWalking, Sex, ...\r\n## dbl  (4): BMI, PhysicalHealth, MentalHealth, SleepTime\r\n## \r\n## ℹ Use `spec()` to retrieve the full column specification for this data.\r\n## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.\r\nheart2020\r\n## # A tibble: 319,795 × 18\r\n##    HeartDis…¹   BMI Smoking Alcoh…² Stroke Physi…³ Menta…⁴ DiffW…⁵ Sex   AgeCa…⁶\r\n##    <chr>      <dbl> <chr>   <chr>   <chr>    <dbl>   <dbl> <chr>   <chr> <chr>  \r\n##  1 No          16.6 Yes     No      No           3      30 No      Fema… 55-59  \r\n##  2 No          20.3 No      No      Yes          0       0 No      Fema… 80 or …\r\n##  3 No          26.6 Yes     No      No          20      30 No      Male  65-69  \r\n##  4 No          24.2 No      No      No           0       0 No      Fema… 75-79  \r\n##  5 No          23.7 No      No      No          28       0 Yes     Fema… 40-44  \r\n##  6 Yes         28.9 Yes     No      No           6       0 Yes     Fema… 75-79  \r\n##  7 No          21.6 No      No      No          15       0 No      Fema… 70-74  \r\n##  8 No          31.6 Yes     No      No           5       0 Yes     Fema… 80 or …\r\n##  9 No          26.4 No      No      No           0       0 No      Fema… 80 or …\r\n## 10 No          40.7 No      No      No           0       0 Yes     Male  65-69  \r\n## # … with 319,785 more rows, 8 more variables: Race <chr>, Diabetic <chr>,\r\n## #   PhysicalActivity <chr>, GenHealth <chr>, SleepTime <dbl>, Asthma <chr>,\r\n## #   KidneyDisease <chr>, SkinCancer <chr>, and abbreviated variable names\r\n## #   ¹​HeartDisease, ²​AlcoholDrinking, ³​PhysicalHealth, ⁴​MentalHealth,\r\n## #   ⁵​DiffWalking, ⁶​AgeCategory\r\n## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names\r\nsmokeplot <- heart2020 |>\r\n  mutate(Smoker_categorized = if_else(Smoking == \"Yes\", \"Smokes\", \"Does Not Smoke\")) |>\r\n  select(Race, Smoker_categorized, HeartDisease, Diabetic) |>\r\n  group_by(Race, Smoker_categorized, Diabetic) |> \r\n  summarize(Percent_HD = mean(HeartDisease == \"Yes\"), .groups = \"drop\") |>\r\n  ggplot(aes(x = Race, y = Percent_HD, fill = Diabetic)) +\r\n  coord_flip() +\r\n  geom_col(color = \"black\") +\r\n  facet_wrap(~Smoker_categorized) +\r\n  scale_y_continuous(labels = scales::percent_format()) +\r\n  theme_light() +\r\n   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank()) +\r\n  labs(title = \"Comparison of the Percent of Smoking and Non-Smoking \\nIndividuals from Each Race Who Have Heart Disease\",\r\n       subtitle = \"Individuals with Diabetes are much more susceptible to heart issues\",\r\n       y = \"Percent with Heart Disease in Each Race\",\r\n       x = \"Race\") +\r\n    theme(plot.title = element_text(face = \"bold\"), \r\n          plot.subtitle = element_text(face = \"italic\"),\r\n          axis.text = element_text(face = \"bold\"), \r\n          axis.title.x = element_text(face = \"bold\"),\r\n          axis.title.y = element_text(face = \"bold\"))\r\nwrite_rds(smokeplot, \"smokeplot.rds\")\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-14T20:42:28-04:00"
+    },
+    {
+      "path": "source_1.html",
+      "title": "Untitled",
+      "description": "A new article created using the Distill format.\n",
+      "author": [
+        {
+          "name": "Nora Jones",
+          "url": "https://example.com/norajones"
+        }
+      ],
+      "date": "`r Sys.Date()`",
+      "contents": "\r\nDistill is a publication format for scientific and technical writing,\r\nnative to the web.\r\nLearn more about using Distill for R Markdown at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-14T20:42:29-04:00"
     },
     {
       "path": "source_A.html",
@@ -26,8 +66,9 @@
           "url": "https://example.com/norajones"
         }
       ],
-      "contents": "\r\nDistill is a publication format for scientific and technical writing,\r\nnative to the web.\r\nLearn more about using Distill for R Markdown at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-08T00:04:50-04:00"
+      "date": "`r Sys.Date()`",
+      "contents": "\r\nSource A was Primer.data. It was flawless. (Kane 2020) (Jones 2018)\r\n\r\n\r\n\r\nJones, Nora. 2018. “Distill for r Markdown.” Journal of\r\nData Science Software. https://doi.org/10.23915/distill.00010.\r\n\r\n\r\nKane, David. 2020. Primer.data.\r\n\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-08-14T20:42:31-04:00"
     },
     {
       "path": "source_B.html",
@@ -40,7 +81,7 @@
         }
       ],
       "contents": "\r\nDistill is a publication format for scientific and technical writing,\r\nnative to the web.\r\nLearn more about using Distill for R Markdown at https://rstudio.github.io/distill.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-08-08T00:04:51-04:00"
+      "last_modified": "2022-08-14T20:42:31-04:00"
     }
   ],
   "collections": []

@@ -1,0 +1,40 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(ggthemes)
+```
+
+```{r}
+heart2020 <- read_csv(file = "heart_2020_cleaned.csv")
+```
+
+```{r}
+introplot <- heart2020 |>
+  group_by(AgeCategory)|>
+  summarize(PercentageofHD = mean(HeartDisease == "Yes")) |>
+  ggplot(aes(x = AgeCategory, y = PercentageofHD)) +
+   geom_smooth(method = "loess", formula = y ~ x) +
+  geom_col(fill = "maroon", color = "black") +
+ scale_x_discrete(breaks = c("18-24", "30-34", "40-44", "50-54", "60-64", "70-74", "80 or older")) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal() +
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  labs(title = "The Age Distribution of People With Heart Disease",
+       subtitle = "Risk for Heart Problems Increases With Age",
+       x = "Age",
+       y = "Percentage Heart Disease") +
+  theme(plot.title = element_text(face = "bold"),
+          axis.text = element_text(face = "bold"), 
+          axis.title.x = element_text(face = "bold"),
+          axis.title.y = element_text(face = "bold"))
+```
+
+```{r}
+write_rds(introplot, "introplot.rds")
+```
+

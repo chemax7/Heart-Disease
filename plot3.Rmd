@@ -1,0 +1,44 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(ggthemes)
+```
+
+```{r}
+heart2020 <- read_csv(file = "heart_2020_cleaned.csv")
+heart2020
+```
+
+```{r}
+smokeplot <- heart2020 |>
+  mutate(Smoker_categorized = if_else(Smoking == "Yes", "Smokes", "Does Not Smoke")) |>
+  select(Race, Smoker_categorized, HeartDisease, Diabetic) |>
+  group_by(Race, Smoker_categorized, Diabetic) |> 
+  summarize(Percent_HD = mean(HeartDisease == "Yes"), .groups = "drop") |>
+  ggplot(aes(x = Race, y = Percent_HD, fill = Diabetic)) +
+  coord_flip() +
+  geom_col(color = "black") +
+  facet_wrap(~Smoker_categorized) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_light() +
+   theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank()) +
+  labs(title = "Comparison of the Percent of Smoking and Non-Smoking \nIndividuals from Each Race Who Have Heart Disease",
+       subtitle = "Individuals with Diabetes are much more susceptible to heart issues",
+       y = "Percent with Heart Disease in Each Race",
+       x = "Race") +
+    theme(plot.title = element_text(face = "bold"), 
+          plot.subtitle = element_text(face = "italic"),
+          axis.text = element_text(face = "bold"), 
+          axis.title.x = element_text(face = "bold"),
+          axis.title.y = element_text(face = "bold"))
+```
+
+```{r}
+write_rds(smokeplot, "smokeplot.rds")
+```
+
