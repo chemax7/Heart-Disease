@@ -1,0 +1,21 @@
+---
+title: "Source"
+description: |
+  All data pulled from cleaned 2020 CDC dataset.
+author:
+  - name: Kamil Pytlak
+date: "`r Sys.Date()`"
+output: distill::distill_article
+bibliography: bibliography.bib
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+Kaggle dataset: “Personal Key Indicators of Heart Disease." [@pytlak_2020]
+
+For more information about this topic, visit Pytlak's [Personal Heart Disease Predictor](https://kamilpytlak-heart-condition-checker-app-2r42q4.streamlitapp.com/).
+
+
+

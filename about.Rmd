@@ -1,24 +1,17 @@
 ---
-title: "About this site"
-description: |
-  Some additional details about the website
+title: "About Me"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
-## About Me
-**Maxwell** is a rising senior at Newton North High School. He enjoys writing and playing the saxophone.
+## Who I Am
+My name is Maxwell Lu, and I attend Newton North High School.
 
-## About the Project
-My project, *The Title of My Project*, explores...
+Email: maxtlu2005@gmail.com
 
-### Goals
-* Goal One
-  + Challenge One
-* Goal Two
-
-‘“This is data science”’  
-~ Preceptor
-
-[Kane’s Free High School Data Science Bootcamp](https://bootcamp.davidkane.info)
+## About This Project
+* Evaluates over 300,000 samples of participants with or without heart disease
+* Compares distinct risk factors and demographics through straightforward bar charts
+* [Project Code](https://github.com/chemax7/distill-tutorial.git)
+* Created with the aid of [Kane’s Free High School Data Science Bootcamp](https://bootcamp.davidkane.info)

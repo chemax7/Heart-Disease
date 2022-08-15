@@ -11,7 +11,7 @@
 
 
 
-<title>plot2.knit</title>
+<title>plot4.knit</title>
 
 <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content=""/>
@@ -916,47 +916,45 @@ $(document).ready(function () {
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>heart2020 |&gt;
-slice_sample(n = 1000)</code></pre>
-<pre><code>## # A tibble: 1,000 × 18
+<pre class="r"><code>heart2020</code></pre>
+<pre><code>## # A tibble: 319,795 × 18
 ##    HeartDis…¹   BMI Smoking Alcoh…² Stroke Physi…³ Menta…⁴ DiffW…⁵ Sex   AgeCa…⁶
 ##    &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
-##  1 No          27.3 No      No      No           0      10 No      Male  30-34  
-##  2 No          26.4 No      No      No          25      20 Yes     Fema… 70-74  
-##  3 No          35.5 Yes     No      No           0       7 No      Fema… 30-34  
-##  4 No          28.3 No      No      No           0       0 Yes     Fema… 80 or …
-##  5 No          28.3 No      No      No           0       0 No      Fema… 60-64  
-##  6 No          23.7 No      No      No           0       3 No      Male  18-24  
-##  7 No          32.6 Yes     No      No          20      20 No      Fema… 30-34  
-##  8 No          32.1 Yes     No      No           0       0 No      Fema… 50-54  
-##  9 No          32.9 No      No      No           0       0 No      Male  40-44  
-## 10 No          29.2 No      No      No           0       0 No      Male  30-34  
-## # … with 990 more rows, 8 more variables: Race &lt;chr&gt;, Diabetic &lt;chr&gt;,
+##  1 No          16.6 Yes     No      No           3      30 No      Fema… 55-59  
+##  2 No          20.3 No      No      Yes          0       0 No      Fema… 80 or …
+##  3 No          26.6 Yes     No      No          20      30 No      Male  65-69  
+##  4 No          24.2 No      No      No           0       0 No      Fema… 75-79  
+##  5 No          23.7 No      No      No          28       0 Yes     Fema… 40-44  
+##  6 Yes         28.9 Yes     No      No           6       0 Yes     Fema… 75-79  
+##  7 No          21.6 No      No      No          15       0 No      Fema… 70-74  
+##  8 No          31.6 Yes     No      No           5       0 Yes     Fema… 80 or …
+##  9 No          26.4 No      No      No           0       0 No      Fema… 80 or …
+## 10 No          40.7 No      No      No           0       0 Yes     Male  65-69  
+## # … with 319,785 more rows, 8 more variables: Race &lt;chr&gt;, Diabetic &lt;chr&gt;,
 ## #   PhysicalActivity &lt;chr&gt;, GenHealth &lt;chr&gt;, SleepTime &lt;dbl&gt;, Asthma &lt;chr&gt;,
 ## #   KidneyDisease &lt;chr&gt;, SkinCancer &lt;chr&gt;, and abbreviated variable names
 ## #   ¹​HeartDisease, ²​AlcoholDrinking, ³​PhysicalHealth, ⁴​MentalHealth,
 ## #   ⁵​DiffWalking, ⁶​AgeCategory
 ## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
-<pre class="r"><code>sample1000 &lt;- heart2020 |&gt;
-  slice_sample(n = 1000)</code></pre>
-<pre class="r"><code>healthplot &lt;- sample1000 |&gt;
-  group_by(GenHealth, Sex) |&gt;
-  summarize(mean_BMI = mean(BMI), .groups = &quot;drop&quot;) |&gt;
-  ggplot(aes(x = GenHealth, y = mean_BMI, fill = Sex)) +
+<pre class="r"><code>BMIplot &lt;- heart2020 |&gt;
+  mutate(avg_BMI = mean(BMI)) |&gt;
+  mutate(BMI_categorized = if_else(BMI &gt; 28.3254, TRUE, FALSE)) |&gt;
+  group_by(BMI_categorized, Race) |&gt;
+  summarize(Percent_HD = mean(HeartDisease == &quot;Yes&quot;), .groups = &quot;drop&quot;) |&gt;
+  ggplot(aes(x = BMI_categorized, y = Percent_HD, fill = Race)) +
   geom_col(position = &quot;dodge&quot;, color = &quot;black&quot;) +
-  scale_fill_manual(values = c(&quot;cornflowerblue&quot;, &quot;lightpink&quot;)) +
-  scale_x_discrete(limits = c(&quot;Poor&quot;, &quot;Fair&quot;, &quot;Good&quot;, &quot;Very good&quot;, &quot;Excellent&quot;)) +
+   theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  scale_y_continuous(labels = scales::percent_format()) +
   theme_minimal() +
-  labs(title = &quot;The Average Body Mass Index in Five Categories of Health&quot;,
-       subtitle = &quot;Higher BMIs tend to result in worsened health&quot;,
-       x = &quot;General Health&quot;,
-       y = &quot;Average Body Mass Index (BMI)&quot;,
-       fill = &quot;Gender&quot;) +
-      theme(plot.title = element_text(face = &quot;bold&quot;),
+  labs(title = &quot;Weight and Heart Disease&quot;,
+       subtitle = &quot;The overweight in all races aside from American Indian/Alaskan Native experience \nan increase in heart disease&quot;,
+       x = &quot;Above Mean BMI&quot;,
+       y = &quot;Percentage Heart Disease&quot;) +
+  theme(plot.title = element_text(face = &quot;bold&quot;),
           axis.text = element_text(face = &quot;bold&quot;), 
           axis.title.x = element_text(face = &quot;bold&quot;),
           axis.title.y = element_text(face = &quot;bold&quot;))</code></pre>
-<pre class="r"><code>write_rds(healthplot, &quot;healthplot.rds&quot;)</code></pre>
+<pre class="r"><code>write_rds(BMIplot, &quot;BMIplot.rds&quot;)</code></pre>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

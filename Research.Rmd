@@ -1,0 +1,33 @@
+---
+title: "My Research"
+description: |
+  Examining several graphs relating obesity, smoking, diabetes, gender, and race to heart disease.
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(ggthemes)
+library(dplyr)
+```
+
+## Poor health is associated with higher body mass index measurements
+
+```{r}
+read_rds("healthplot.rds")
+```
+
+```{r}
+read_rds("BMIplot.rds")
+```
+## Smoking and diabetes lead to increased rates of heart disease across multiple races
+
+```{r}
+read_rds("smokeplot.rds")
+```
+
+
+
+
+

@@ -27,8 +27,8 @@ smokeplot <- heart2020 |>
   scale_y_continuous(labels = scales::percent_format()) +
   theme_light() +
    theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank()) +
-  labs(title = "Comparison of the Percent of Smoking and Non-Smoking \nIndividuals from Each Race Who Have Heart Disease",
-       subtitle = "Individuals with Diabetes are much more susceptible to heart issues",
+  labs(title = "Percent of Smoking and Non-Smoking \nIndividuals from Each Race With Heart Disease",
+       subtitle = "Individuals with Diabetes are more susceptible to heart issues",
        y = "Percent with Heart Disease in Each Race",
        x = "Race") +
     theme(plot.title = element_text(face = "bold"), 
