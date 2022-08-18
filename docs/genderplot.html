@@ -11,7 +11,7 @@
 
 
 
-<title>plot1.knit</title>
+<title>genderplot.knit</title>
 
 <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content=""/>
@@ -907,7 +907,8 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>heart2020 &lt;- read_csv(file = &quot;heart_2020_cleaned.csv&quot;)</code></pre>
+<pre class="r"><code># Read as CSV the file everytime
+heart2020 &lt;- read_csv(file = &quot;heart_2020_cleaned.csv&quot;)</code></pre>
 <pre><code>## Rows: 319795 Columns: 18
 ## ── Column specification ────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -916,12 +917,16 @@ $(document).ready(function () {
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>introplot &lt;- heart2020 |&gt;
-  group_by(AgeCategory)|&gt;
-  summarize(PercentageofHD = mean(HeartDisease == &quot;Yes&quot;)) |&gt;
-  ggplot(aes(x = AgeCategory, y = PercentageofHD)) +
-   geom_smooth(method = &quot;loess&quot;, formula = y ~ x) +
-  geom_col(fill = &quot;maroon&quot;, color = &quot;black&quot;) +
+<pre class="r"><code>genderplot &lt;- heart2020 |&gt;
+  # We only care about age and sex in relation to heart disease, nothing else
+  group_by(AgeCategory, Sex)|&gt;
+  # This creates a percentage of people with heart disease/aka those who answer &quot;Yes&quot; Use .groups = to drop the error message
+  summarize(PercentageofHD = mean(HeartDisease == &quot;Yes&quot;), .groups = &quot;drop&quot;) |&gt;
+  # Making the plot: important note is group = which groups the lines by Sex
+  ggplot(mapping = aes(x = AgeCategory, y = PercentageofHD, group = Sex, color = Sex)) +
+  geom_line(size = 1) +
+  geom_point() +
+  # This changes the x-axis marks
  scale_x_discrete(breaks = c(&quot;18-24&quot;, &quot;30-34&quot;, &quot;40-44&quot;, &quot;50-54&quot;, &quot;60-64&quot;, &quot;70-74&quot;, &quot;80 or older&quot;)) +
   scale_y_continuous(labels = scales::percent_format()) +
   theme_minimal() +
@@ -930,11 +935,12 @@ $(document).ready(function () {
        subtitle = &quot;Risk for Heart Problems Increases With Age&quot;,
        x = &quot;Age&quot;,
        y = &quot;Percentage Heart Disease&quot;) +
+  # Messes with the fonts of the graph
   theme(plot.title = element_text(face = &quot;bold&quot;),
           axis.text = element_text(face = &quot;bold&quot;), 
           axis.title.x = element_text(face = &quot;bold&quot;),
           axis.title.y = element_text(face = &quot;bold&quot;))</code></pre>
-<pre class="r"><code>write_rds(introplot, &quot;introplot.rds&quot;)</code></pre>
+<pre class="r"><code>write_rds(genderplot, &quot;genderplot.rds&quot;)</code></pre>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

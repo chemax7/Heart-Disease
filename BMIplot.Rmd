@@ -16,19 +16,27 @@ heart2020
 
 ```{r}
 BMIplot <- heart2020 |>
+  # calculates mean BMI in entire dataset
   mutate(avg_BMI = mean(BMI)) |>
+  # assigns TRUE or FALSE: true = above mean BMI, and vice versa
   mutate(BMI_categorized = if_else(BMI > 28.3254, TRUE, FALSE)) |>
+  # these are the only variables we care about
   group_by(BMI_categorized, Race) |>
+  # creates percentages of heart disease for many combinations of the variables in the group_by function
   summarize(Percent_HD = mean(HeartDisease == "Yes"), .groups = "drop") |>
   ggplot(aes(x = BMI_categorized, y = Percent_HD, fill = Race)) +
+  # Aligns the races in a side by side format
   geom_col(position = "dodge", color = "black") +
+  # Gets rid of lines for x axis (since this is a bar chart, they aren't neccesary)
    theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  # changes everything to percentage
   scale_y_continuous(labels = scales::percent_format()) +
   theme_minimal() +
   labs(title = "Weight and Heart Disease",
        subtitle = "The overweight in all races aside from American Indian/Alaskan Native experience \nan increase in heart disease",
        x = "Above Mean BMI",
        y = "Percentage Heart Disease") +
+  # changes fonts
   theme(plot.title = element_text(face = "bold"),
           axis.text = element_text(face = "bold"), 
           axis.title.x = element_text(face = "bold"),
@@ -38,5 +46,3 @@ BMIplot <- heart2020 |>
 ```{r}
 write_rds(BMIplot, "BMIplot.rds")
 ```
-
-

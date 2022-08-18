@@ -12,22 +12,40 @@ library(ggthemes)
 library(dplyr)
 ```
 
-## Poor health is associated with higher body mass index measurements
+## Heart Disease by Gender
+
+The graph below reveals that males have a significantly higher chance of contracting heart disease than females. Similar to the race plot, the percentage gap of heart disease increases with age. I hypothesized that this increase could be due to increased damage over time to the cardiovascular system from risk factors that were more applicable to males, such as smoking and obesity.
+
+```{r}
+read_rds("genderplot.rds")
+```
+
+Interestingly, after investigating the average BMIs of males and females, I found that there was not a significant deviation between the average BMIs of both genders. Although higher BMIs tended to result in health decline, this trend was relatively the same for males and females.
 
 ```{r}
 read_rds("healthplot.rds")
 ```
 
+## Impact of BMI and Race on Heart Disease
+
+On the other hand, after investigating the BMIs of across different races in relation to the percentage of heart disease, I found that a higher BMI respondents did indeed contribute a higher percentage of heart disease than did those with a lower BMI. However, the one inconsistency I discovered was the American Indian/Alaskan Native population, in which lower BMI respondents had a higher percentage of heart disease.
+
 ```{r}
 read_rds("BMIplot.rds")
 ```
-## Smoking and diabetes lead to increased rates of heart disease across multiple races
+
+## Effects of Smoking and Diabetes on Heart Disease
+
+Because BMI did not seem to tell a complete story of the factors that increases heart disease contraction, I analyzed whether or not smoking and diabetes could be risk factors of heart disease. 
+
+In the chart below, each race's heart disease percentage was analyzed by smoking and diabetes status. I found that diabetes greatly contributed to the percentage of heart disease across every race. Furthermore, the percentage of heart disease in every race was higher in those who smoked than those who did not.
 
 ```{r}
 read_rds("smokeplot.rds")
 ```
 
+## Conclusion
 
+Through the data provided by Kamil Pytlak, I found that males contribute to the percentage of heart disease in the dataset far more than females do. American Indians/Alaskan Natives had the greatest percentage of heart disease among all other races, which was likely due to increased smoking habits. 
 
-
-
+Finding ways to reduce poor smoking habits and investigate why they arise, especially in the American Indian/Alaskan Native population, may help decrease the chance of getting heart disease. 

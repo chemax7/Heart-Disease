@@ -11,7 +11,7 @@
 
 
 
-<title>plot3.knit</title>
+<title>smokeplot.knit</title>
 
 <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content=""/>
@@ -937,21 +937,29 @@ $(document).ready(function () {
 ## #   ⁵​DiffWalking, ⁶​AgeCategory
 ## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
 <pre class="r"><code>smokeplot &lt;- heart2020 |&gt;
+  # Creates new variable that measures smoking status
   mutate(Smoker_categorized = if_else(Smoking == &quot;Yes&quot;, &quot;Smokes&quot;, &quot;Does Not Smoke&quot;)) |&gt;
   select(Race, Smoker_categorized, HeartDisease, Diabetic) |&gt;
+  # These are the ones we care about
   group_by(Race, Smoker_categorized, Diabetic) |&gt; 
+  # This creates a list of percentages of heart disease with all kinds of combinations from the variables of the group_by function
   summarize(Percent_HD = mean(HeartDisease == &quot;Yes&quot;), .groups = &quot;drop&quot;) |&gt;
   ggplot(aes(x = Race, y = Percent_HD, fill = Diabetic)) +
+  # Flips bar chart from up bar chart to side chart
   coord_flip() +
   geom_col(color = &quot;black&quot;) +
+  # Creates two plots: one of people who don&#39;t smoke, and one for people who do
   facet_wrap(~Smoker_categorized) +
+  # changes everything y axis label percentage
   scale_y_continuous(labels = scales::percent_format()) +
   theme_light() +
+  # gets rid of y axis line (since this is bar chart we don&#39;t need it)
    theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank()) +
   labs(title = &quot;Percent of Smoking and Non-Smoking \nIndividuals from Each Race With Heart Disease&quot;,
        subtitle = &quot;Individuals with Diabetes are more susceptible to heart issues&quot;,
        y = &quot;Percent with Heart Disease in Each Race&quot;,
        x = &quot;Race&quot;) +
+  # Messes with fonts in graph
     theme(plot.title = element_text(face = &quot;bold&quot;), 
           plot.subtitle = element_text(face = &quot;italic&quot;),
           axis.text = element_text(face = &quot;bold&quot;), 

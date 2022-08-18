@@ -11,7 +11,7 @@
 
 
 
-<title>plot4.knit</title>
+<title>raceplot.knit</title>
 
 <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content=""/>
@@ -916,45 +916,32 @@ $(document).ready(function () {
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-<pre class="r"><code>heart2020</code></pre>
-<pre><code>## # A tibble: 319,795 × 18
-##    HeartDis…¹   BMI Smoking Alcoh…² Stroke Physi…³ Menta…⁴ DiffW…⁵ Sex   AgeCa…⁶
-##    &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;  
-##  1 No          16.6 Yes     No      No           3      30 No      Fema… 55-59  
-##  2 No          20.3 No      No      Yes          0       0 No      Fema… 80 or …
-##  3 No          26.6 Yes     No      No          20      30 No      Male  65-69  
-##  4 No          24.2 No      No      No           0       0 No      Fema… 75-79  
-##  5 No          23.7 No      No      No          28       0 Yes     Fema… 40-44  
-##  6 Yes         28.9 Yes     No      No           6       0 Yes     Fema… 75-79  
-##  7 No          21.6 No      No      No          15       0 No      Fema… 70-74  
-##  8 No          31.6 Yes     No      No           5       0 Yes     Fema… 80 or …
-##  9 No          26.4 No      No      No           0       0 No      Fema… 80 or …
-## 10 No          40.7 No      No      No           0       0 Yes     Male  65-69  
-## # … with 319,785 more rows, 8 more variables: Race &lt;chr&gt;, Diabetic &lt;chr&gt;,
-## #   PhysicalActivity &lt;chr&gt;, GenHealth &lt;chr&gt;, SleepTime &lt;dbl&gt;, Asthma &lt;chr&gt;,
-## #   KidneyDisease &lt;chr&gt;, SkinCancer &lt;chr&gt;, and abbreviated variable names
-## #   ¹​HeartDisease, ²​AlcoholDrinking, ³​PhysicalHealth, ⁴​MentalHealth,
-## #   ⁵​DiffWalking, ⁶​AgeCategory
-## # ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</code></pre>
-<pre class="r"><code>BMIplot &lt;- heart2020 |&gt;
-  mutate(avg_BMI = mean(BMI)) |&gt;
-  mutate(BMI_categorized = if_else(BMI &gt; 28.3254, TRUE, FALSE)) |&gt;
-  group_by(BMI_categorized, Race) |&gt;
-  summarize(Percent_HD = mean(HeartDisease == &quot;Yes&quot;), .groups = &quot;drop&quot;) |&gt;
-  ggplot(aes(x = BMI_categorized, y = Percent_HD, fill = Race)) +
-  geom_col(position = &quot;dodge&quot;, color = &quot;black&quot;) +
-   theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+<pre class="r"><code>raceplot &lt;- heart2020 |&gt;
+  # age and race are the ones we are investigating in relation to percentage of heart disease
+  group_by(AgeCategory, Race)|&gt;
+  # we wanted to create a new variable that measured the percentage of heart disease across different combinations of the variables in the group_by function
+  summarize(PercentageofHD = mean(HeartDisease == &quot;Yes&quot;), .groups = &quot;drop&quot;) |&gt;
+  ggplot(mapping = aes(x = AgeCategory, y = PercentageofHD, group = Race, color = Race)) +
+  # connects the lines in the scatterplot
+  geom_line(size = 1) +
+  geom_point() +
+  # changes the labels of the x axis
+ scale_x_discrete(breaks = c(&quot;18-24&quot;, &quot;30-34&quot;, &quot;40-44&quot;, &quot;50-54&quot;, &quot;60-64&quot;, &quot;70-74&quot;, &quot;80 or older&quot;)) +
+  # changes values in y axis to percentage
   scale_y_continuous(labels = scales::percent_format()) +
   theme_minimal() +
-  labs(title = &quot;Weight and Heart Disease&quot;,
-       subtitle = &quot;The overweight in all races aside from American Indian/Alaskan Native experience \nan increase in heart disease&quot;,
-       x = &quot;Above Mean BMI&quot;,
+  # eliminates x axis lines (since bar chart, these aren&#39;t necessary)
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  labs(title = &quot;The Age Distribution of People With Heart Disease&quot;,
+       subtitle = &quot;Risk for Heart Problems Increases With Age&quot;,
+       x = &quot;Age&quot;,
        y = &quot;Percentage Heart Disease&quot;) +
+  # changes fonts
   theme(plot.title = element_text(face = &quot;bold&quot;),
           axis.text = element_text(face = &quot;bold&quot;), 
           axis.title.x = element_text(face = &quot;bold&quot;),
           axis.title.y = element_text(face = &quot;bold&quot;))</code></pre>
-<pre class="r"><code>write_rds(BMIplot, &quot;BMIplot.rds&quot;)</code></pre>
+<pre class="r"><code>write_rds(raceplot, &quot;raceplot.rds&quot;)</code></pre>
 
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->

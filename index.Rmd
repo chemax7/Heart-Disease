@@ -1,15 +1,15 @@
 ---
 title: "Heart Disease: Risk Factors and Demographics"
 description: |
-  Analyzing certain risk factors, ranging from smoking to obesity, that increase susceptibility to cardiovascular issues.
+  Analyzing certain factors that increase susceptibility to cardiovascular issues.
 site: distill::distill_website
 ---
 
 ## Introduction
 
-Heart disease is the leading cause of death for most ethnic groups in the United States. The following data was pulled from Kamil Pytlak's Kaggle Dataset, which previously originated from a CDC telephone poll responses regarding heart disease. From Pytlak's dataset, Bar Chart data was used to visualize the various factors contributing to heart disease in an intuitive format. The data from this project shows that while heart disease plagues much of the U.S. population today, humans can take preventative measures. For example, it was found that both smoking and diabetes contribute significantly to the number of people affected by heart disease across several distinct races.
+Today, heart disease is the number one cause of death in the United States. My project investigates the risk factors of heart disease, including smoking, diabetes, and obesity. I also investigated whether or not heart disease was more prevalent in a particular race or gender.
 
-The chart below shows the exponentially proportional relationship between age and that age's percentage in the study's total population with heart disease.
+As shown below, I found that the majority of individuals with heart disease in the data were of American Indian/Alaskan Native descent. Furthermore, I discovered that the heart disease was least prevalent in the Asian population. In addition, the percentage gap of heart disease between each group seems to get larger with age. 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
@@ -19,5 +19,5 @@ library(dplyr)
 ```
 
 ```{r}
-read_rds("introplot.rds")
+read_rds("raceplot.rds")
 ```

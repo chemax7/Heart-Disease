@@ -10,16 +10,21 @@ library(ggthemes)
 ```
 
 ```{r}
+# Read as CSV the file everytime
 heart2020 <- read_csv(file = "heart_2020_cleaned.csv")
 ```
 
 ```{r}
-introplot <- heart2020 |>
-  group_by(AgeCategory)|>
-  summarize(PercentageofHD = mean(HeartDisease == "Yes")) |>
-  ggplot(aes(x = AgeCategory, y = PercentageofHD)) +
-   geom_smooth(method = "loess", formula = y ~ x) +
-  geom_col(fill = "maroon", color = "black") +
+genderplot <- heart2020 |>
+  # We only care about age and sex in relation to heart disease, nothing else
+  group_by(AgeCategory, Sex)|>
+  # This creates a percentage of people with heart disease/aka those who answer "Yes" Use .groups = to drop the error message
+  summarize(PercentageofHD = mean(HeartDisease == "Yes"), .groups = "drop") |>
+  # Making the plot: important note is group = which groups the lines by Sex
+  ggplot(mapping = aes(x = AgeCategory, y = PercentageofHD, group = Sex, color = Sex)) +
+  geom_line(size = 1) +
+  geom_point() +
+  # This changes the x-axis marks
  scale_x_discrete(breaks = c("18-24", "30-34", "40-44", "50-54", "60-64", "70-74", "80 or older")) +
   scale_y_continuous(labels = scales::percent_format()) +
   theme_minimal() +
@@ -28,6 +33,7 @@ introplot <- heart2020 |>
        subtitle = "Risk for Heart Problems Increases With Age",
        x = "Age",
        y = "Percentage Heart Disease") +
+  # Messes with the fonts of the graph
   theme(plot.title = element_text(face = "bold"),
           axis.text = element_text(face = "bold"), 
           axis.title.x = element_text(face = "bold"),
@@ -35,6 +41,6 @@ introplot <- heart2020 |>
 ```
 
 ```{r}
-write_rds(introplot, "introplot.rds")
+write_rds(genderplot, "genderplot.rds")
 ```
 

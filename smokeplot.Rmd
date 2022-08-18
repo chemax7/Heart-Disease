@@ -16,21 +16,29 @@ heart2020
 
 ```{r}
 smokeplot <- heart2020 |>
+  # Creates new variable that measures smoking status
   mutate(Smoker_categorized = if_else(Smoking == "Yes", "Smokes", "Does Not Smoke")) |>
   select(Race, Smoker_categorized, HeartDisease, Diabetic) |>
+  # These are the ones we care about
   group_by(Race, Smoker_categorized, Diabetic) |> 
+  # This creates a list of percentages of heart disease with all kinds of combinations from the variables of the group_by function
   summarize(Percent_HD = mean(HeartDisease == "Yes"), .groups = "drop") |>
   ggplot(aes(x = Race, y = Percent_HD, fill = Diabetic)) +
+  # Flips bar chart from up bar chart to side chart
   coord_flip() +
   geom_col(color = "black") +
+  # Creates two plots: one of people who don't smoke, and one for people who do
   facet_wrap(~Smoker_categorized) +
+  # changes everything y axis label percentage
   scale_y_continuous(labels = scales::percent_format()) +
   theme_light() +
+  # gets rid of y axis line (since this is bar chart we don't need it)
    theme(panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank()) +
   labs(title = "Percent of Smoking and Non-Smoking \nIndividuals from Each Race With Heart Disease",
        subtitle = "Individuals with Diabetes are more susceptible to heart issues",
        y = "Percent with Heart Disease in Each Race",
        x = "Race") +
+  # Messes with fonts in graph
     theme(plot.title = element_text(face = "bold"), 
           plot.subtitle = element_text(face = "italic"),
           axis.text = element_text(face = "bold"), 

@@ -1,0 +1,47 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(ggthemes)
+```
+
+```{r}
+heart2020 <- read_csv(file = "heart_2020_cleaned.csv")
+```
+
+
+```{r}
+raceplot <- heart2020 |>
+  # age and race are the ones we are investigating in relation to percentage of heart disease
+  group_by(AgeCategory, Race)|>
+  # we wanted to create a new variable that measured the percentage of heart disease across different combinations of the variables in the group_by function
+  summarize(PercentageofHD = mean(HeartDisease == "Yes"), .groups = "drop") |>
+  ggplot(mapping = aes(x = AgeCategory, y = PercentageofHD, group = Race, color = Race)) +
+  # connects the lines in the scatterplot
+  geom_line(size = 1) +
+  geom_point() +
+  # changes the labels of the x axis
+ scale_x_discrete(breaks = c("18-24", "30-34", "40-44", "50-54", "60-64", "70-74", "80 or older")) +
+  # changes values in y axis to percentage
+  scale_y_continuous(labels = scales::percent_format()) +
+  theme_minimal() +
+  # eliminates x axis lines (since bar chart, these aren't necessary)
+  theme(panel.grid.major.x = element_blank(), panel.grid.minor.x = element_blank()) +
+  labs(title = "The Age Distribution of People With Heart Disease",
+       subtitle = "Risk for Heart Problems Increases With Age",
+       x = "Age",
+       y = "Percentage Heart Disease") +
+  # changes fonts
+  theme(plot.title = element_text(face = "bold"),
+          axis.text = element_text(face = "bold"), 
+          axis.title.x = element_text(face = "bold"),
+          axis.title.y = element_text(face = "bold"))
+```
+
+```{r}
+write_rds(raceplot, "raceplot.rds")
+```

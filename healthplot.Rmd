@@ -21,12 +21,17 @@ sample1000 <- heart2020 |>
 ```
 
 ```{r}
-healthplot <- sample1000 |>
+healthplot <- heart2020 |>
+  # All we care about is sex and general health in relation to BMI
   group_by(GenHealth, Sex) |>
+  # This creates another variable which gives a mean BMI for each combination of sex and general health
   summarize(mean_BMI = mean(BMI), .groups = "drop") |>
   ggplot(aes(x = GenHealth, y = mean_BMI, fill = Sex)) +
-  geom_col(position = "dodge", color = "black") +
-  scale_fill_manual(values = c("cornflowerblue", "lightpink")) +
+  # Puts males and females side by side
+  geom_col(position = "dodge") +
+  # Assigns colors to each bar = pink for female, blue for male
+  scale_fill_manual(values = c("lightpink", "cornflowerblue")) +
+  # Changes order to x-axis labels
   scale_x_discrete(limits = c("Poor", "Fair", "Good", "Very good", "Excellent")) +
   theme_minimal() +
   labs(title = "The Average Body Mass Index in Five Categories of Health",
@@ -34,6 +39,7 @@ healthplot <- sample1000 |>
        x = "General Health",
        y = "Average Body Mass Index (BMI)",
        fill = "Gender") +
+  # Messes with fonts
       theme(plot.title = element_text(face = "bold"),
           axis.text = element_text(face = "bold"), 
           axis.title.x = element_text(face = "bold"),
